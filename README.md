@@ -13,6 +13,7 @@ This project is a Retrieval-Augmented Generation (RAG) application built with [L
 - Node.js v18 or later (tested on v23)
 - [pnpm](https://pnpm.io/) (or npm/yarn)
 - OpenAI API key
+- LandSmith API credentials (if using LandSmith features)
 
 ## Setup
 1. **Clone the repository:**
@@ -30,8 +31,12 @@ This project is a Retrieval-Augmented Generation (RAG) application built with [L
    - Create a `.env` file in the project root:
      ```env
      OPENAI_API_KEY=sk-...
+     LANDSMITH_API_KEY=your_landsmith_api_key
+     LANDSMITH_API_URL=https://api.landsmith.ai
+     # Add any other required LandSmith variables here
      ```
-   - Replace `sk-...` with your actual OpenAI API key.
+   - Replace `sk-...` and `your_landsmith_api_key` with your actual API keys.
+   - The `LANDSMITH_API_URL` should point to the correct LandSmith endpoint if different from above.
 
 ## Usage
 - **Run the main RAG app:**
@@ -52,12 +57,15 @@ This project is a Retrieval-Augmented Generation (RAG) application built with [L
   - This project uses `MemoryVectorStore` (pure JS, no native dependencies). If you see errors about `faiss-node`, ensure you are not using `FaissStore` in your code. Remove `faiss-node` from dependencies if not needed.
 - **OPENAI_API_KEY missing:**
   - Make sure your `.env` file is present and contains a valid API key.
+- **LANDSMITH_API_KEY or LANDSMITH_API_URL missing:**
+  - Make sure your `.env` file contains the correct LandSmith credentials if you are using LandSmith features.
 - **TypeScript errors about `pageContent`:**
   - Ensure you import `Document` from `@langchain/core/documents`.
 
 ## References
 - [LangChain JS Documentation](https://js.langchain.com/docs/)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
+- [LandSmith API Documentation](https://landsmit.ai/docs)  # (Update with correct link if needed)
 
 ---
 
