@@ -2,7 +2,8 @@
 	"type": "module",
 	"scripts": {
 		"start": "node index.ts",
-		"start:vector-store": "node vector-store.ts"
+		"start:vector-store": "node vector-store.ts",
+		"start:conversational-rag": "node conversational-rag.ts"
 	},
 	"dependencies": {
 		"@langchain/community": "^0.3.45",

@@ -11,12 +11,29 @@ This project demonstrates the following steps:
 - Retrieving the previously stored chunks in response to incoming questions
 - Generating an answer using the retrieved chunks as context
 
+## Conversational RAG Pipeline (conversational-rag.ts)
+This script extends the RAG pipeline with:
+
+- **Conversational message history:** Maintains and streams conversation turns.
+- **Tool-augmented retrieval:** Uses tools and tool calls for retrieval steps.
+- **Streaming responses:** Outputs each step of the conversation as it happens.
+- **Agent-based reasoning:** Demonstrates an agent that can perform multi-step retrieval and reasoning.
+- **Memory checkpointing:** Supports thread-based message history with a memory saver.
+
+**To run the conversational RAG example:**
+```sh
+pnpm start:conversational-rag
+# or
+npm run start:conversational-rag
+```
+
 ## Features
 - Loads and chunks web content using Cheerio
 - Embeds documents with OpenAI embeddings
 - Stores and queries vectors using an in-memory vector store (MemoryVectorStore)
 - Uses OpenAI's GPT models for question answering
 - Example of query analysis and structured output
+- Conversational and agent-based RAG pipelines
 
 ## Requirements
 - Node.js v18 or later (tested on v23)
@@ -59,6 +76,12 @@ This project demonstrates the following steps:
   pnpm start:vector-store
   # or
   npm run start:vector-store
+  ```
+- **Run the conversational RAG example:**
+  ```sh
+  pnpm start:conversational-rag
+  # or
+  npm run start:conversational-rag
   ```
 
 ## Troubleshooting
