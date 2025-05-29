@@ -2,6 +2,15 @@
 
 This project is a Retrieval-Augmented Generation (RAG) application built with [LangChain](https://js.langchain.com/) and OpenAI. It demonstrates how to load, chunk, embed, and query web content using a memory-based vector store.
 
+## Pipeline Overview (index.ts)
+This project demonstrates the following steps:
+
+- Loading data with a Document Loader
+- Chunking the indexed data with a Text Splitter to make it more easily usable by a model
+- Embedding the data and storing the data in a vectorstore
+- Retrieving the previously stored chunks in response to incoming questions
+- Generating an answer using the retrieved chunks as context
+
 ## Features
 - Loads and chunks web content using Cheerio
 - Embeds documents with OpenAI embeddings
