@@ -1,0 +1,19 @@
+{
+	"type": "module",
+	"scripts": {
+		"start": "node index.ts",
+		"start:vector-store": "node vector-store.ts"
+	},
+	"dependencies": {
+		"@langchain/community": "^0.3.45",
+		"@langchain/core": "^0.3.57",
+		"@langchain/langgraph": "^0.2.74",
+		"@langchain/openai": "^0.5.11",
+		"@langchain/textsplitters": "^0.1.0",
+		"cheerio": "^1.0.0",
+		"dotenv": "^16.5.0",
+		"faiss-node": "^0.5.1",
+		"langchain": "^0.3.27",
+		"zod": "^3.25.36"
+	}
+}
