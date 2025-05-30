@@ -2,6 +2,23 @@
 
 This project is a Retrieval-Augmented Generation (RAG) application built with [LangChain](https://js.langchain.com/) and OpenAI. It demonstrates how to load, chunk, embed, and query web content using a memory-based vector store.
 
+## News RAG Pipeline (Planned & MVP)
+This project implements a News RAG pipeline as described in the PRD:
+- Ingest news feeds from various sources (RSS)
+- Classify/filter news for financial data (LLM-based, especially Nasdaq)
+- Tag news with ticker symbols
+- Embed only relevant news into a vector store
+- **Interactive CLI:** Retrieve relevant news on user request via semantic search
+
+### Software Principles & Best Practices
+- **SOLID principles:**
+  - Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+- Modular, maintainable, and testable code
+- Clear naming conventions and documentation
+- Prefer composition over inheritance
+- Graceful error handling
+- Extensible for future data sources or requirements
+
 ## Pipeline Overview (index.ts)
 This project demonstrates the following steps:
 
@@ -34,6 +51,7 @@ npm run start:conversational-rag
 - Uses OpenAI's GPT models for question answering
 - Example of query analysis and structured output
 - Conversational and agent-based RAG pipelines
+- **Interactive CLI for semantic news search**
 
 ## Requirements
 - Node.js v18 or later (tested on v23)
@@ -83,6 +101,26 @@ npm run start:conversational-rag
   # or
   npm run start:conversational-rag
   ```
+- **Run the News RAG CLI (MVP):**
+  ```sh
+  npx ts-node src/ingestion/rssIngest.ts
+  # or, if you have a script:
+  pnpm start:news-rag
+  ```
+  You will be prompted to enter a search query. The system will return the top 3 most relevant news articles using semantic search over the latest financial news.
+
+## CLI Semantic Search Example
+```
+$ npx ts-node src/ingestion/rssIngest.ts
+...
+Embedded and stored 8 news articles in vector store.
+Enter your news search query: tesla
+
+Top 3 results for query: 'tesla'
+- Yahoo! Finance: ^IXIC News: https://finance.yahoo.com/video/nvidia-tariffs-volatility-defense-stocks-211500093.html?.tsrc=rss
+  Nvidia & tariffs, volatility, defense stocks: Market Takeaways US stocks (^DJI, ^IXIC, ^GSPC) manage...
+...
+```
 
 ## Troubleshooting
 - **faiss-node errors:**
@@ -98,6 +136,30 @@ npm run start:conversational-rag
 - [LangChain JS Documentation](https://js.langchain.com/docs/)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
 - [LandSmith API Documentation](https://landsmit.ai/docs)  # (Update with correct link if needed)
+
+## Cost Estimation (OpenAI API)
+
+**Assumptions:**
+- 100 news articles processed per day
+- Each article ~500 tokens
+- All 100 articles classified (LLM), ~50 embedded
+- LLM: gpt-4o-mini ($0.15 per 1M input tokens, $0.60 per 1M output tokens)
+- Embedding: text-embedding-3-large ($0.13 per 1M tokens)
+
+| Period   | LLM Classification | Embedding | **Total** |
+|----------|--------------------|-----------|-----------|
+| Daily    | $0.025             | $0.003    | $0.03     |
+| Weekly   | $0.175             | $0.02     | $0.20     |
+| Monthly  | $0.75              | $0.10     | $0.85     |
+
+- If you embed all 100 articles, embedding cost doubles (still very low)
+- If you use gpt-4o or gpt-4, LLM cost increases by 10x-100x. gpt-4o-mini is the most affordable option for most use cases.
+- For more/longer articles, scale token count accordingly
+- Retrieval costs are negligible
+
+**Conclusion:**
+- The MVP pipeline is extremely affordable (less than $0.05/month for 100 articles/day with gpt-4o-mini)
+- For further savings, batch articles or use keyword filtering before LLM calls
 
 ---
 

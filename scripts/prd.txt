@@ -1,0 +1,54 @@
+# Product Requirements Document: News RAG Pipeline
+
+## Overview
+Build a Retrieval-Augmented Generation (RAG) pipeline using LangChain to process, categorize, and retrieve news articles relevant to financial data, with a focus on Nasdaq-related news. The system should ingest news from various sources, filter and tag relevant articles, embed them for semantic search, and allow user-driven retrieval.
+
+## Goals
+- Automatically ingest news from multiple sources (RSS feeds)
+- Filter and categorize news for financial relevance (especially Nasdaq)
+- Tag news articles with ticker symbols when mentioned
+- Store only relevant news in a vector store for efficient retrieval
+- Enable users to query and retrieve relevant news articles
+
+## Software Principles & Best Practices
+- Follow SOLID principles:
+  - **Single Responsibility Principle:** Each module/class should have one responsibility.
+  - **Open/Closed Principle:** Code should be open for extension, closed for modification.
+  - **Liskov Substitution Principle:** Subtypes must be substitutable for their base types.
+  - **Interface Segregation Principle:** Prefer small, specific interfaces over large, general ones.
+  - **Dependency Inversion Principle:** Depend on abstractions, not concretions.
+- Write modular, maintainable, and testable code
+- Use clear naming conventions and documentation
+- Prefer composition over inheritance where possible
+- Handle errors and edge cases gracefully
+- Ensure code is extensible for future data sources or requirements
+
+## Requirements
+
+### 1. News Feed Ingestion
+- Use RSS feeds to gather news from multiple reputable sources
+- Parse and normalize news articles (title, content, date, source)
+
+### 2. Categorization & Filtering
+- Classify news articles as financial or non-financial
+- Further categorize financial news as Nasdaq-related or not
+- Use LLM-based or rule-based classification as appropriate
+
+### 3. Ticker Tagging
+- Detect and extract ticker symbols (e.g., AAPL, MSFT) from news content
+- Tag articles with the relevant ticker(s) or unique IDs
+
+### 4. Embedding & Storage
+- Embed only relevant (financial, Nasdaq-related) news articles using OpenAI or similar embeddings
+- Store embeddings and metadata in a vector store (e.g., MemoryVectorStore)
+
+### 5. Retrieval
+- Allow users to query the system for news related to specific topics or tickers
+- Retrieve and present the most relevant news articles using semantic search
+
+## Success Criteria
+- Accurate ingestion and normalization of news feeds
+- High precision in financial/Nasdaq news classification
+- Correct tagging of ticker symbols
+- Efficient and accurate retrieval of relevant news articles
+- Modular, maintainable code using LangChain best practices 
